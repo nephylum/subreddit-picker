@@ -1,5 +1,6 @@
 import praw
 import pandas as pd
+import numpy as np
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Embedding
@@ -28,6 +29,7 @@ print('**********')
 # for it in test:
 #  print (''.join(BeautifulSoup(it, features="lxml").findAll(text=True)))
 
+#"confession", "Fitness",
 data = pd.DataFrame()
 top200 = ["AdviceAnimals","AmItheAsshole","Android","AnimalsBeingBros",
 "AnimalsBeingDerps","AnimalsBeingJerks","Art","ArtisanVideos","AskMen",
@@ -35,7 +37,7 @@ top200 = ["AdviceAnimals","AmItheAsshole","Android","AnimalsBeingBros",
 "BlackPeopleTwitter","ChildrenFallingOver","ChoosingBeggars",
 "ContagiousLaughter","Cooking","CrappyDesign","DIY","Damnthatsinteresting",
 "DnD","Documentaries","EarthPorn","EatCheapAndHealthy","Eyebleach","FiftyFifty",
-"Fitness","FoodPorn","Futurology","Games","GetMotivated","GifRecipes",
+"FoodPorn","Futurology","Games","GetMotivated","GifRecipes",
 "HighQualityGifs","HistoryMemes","HistoryPorn","HumansBeingBros","IAmA",
 "IdiotsInCars","InternetIsBeautiful","Jokes","KidsAreFuckingStupid",
 "LifeProTips","MadeMeSmile","MakeupAddiction","Minecraft","MovieDetails",
@@ -48,7 +50,7 @@ top200 = ["AdviceAnimals","AmItheAsshole","Android","AnimalsBeingBros",
 "WhitePeopleTwitter","WritingPrompts","YouShouldKnow","anime","announcements",
 "askscience","atheism","aww","backpacking","battlestations","bestof","biology",
 "blackmagicfuckery","blog","boardgames","books","buildapc","cars","cats",
-"confession","creepy","cursedcomments","dadjokes","dankmemes","dataisbeautiful",
+"creepy","cursedcomments","dadjokes","dankmemes","dataisbeautiful",
 "drawing","electronicmusic","europe","explainlikeimfive","facepalm","food",
 "frugalmalefashion","funny","gadgets","gameofthrones","gaming","gardening",
 "gifs","gonewild","hiphopheads","history","hmmm","horror","howto","humor",
@@ -66,18 +68,34 @@ top200 = ["AdviceAnimals","AmItheAsshole","Android","AnimalsBeingBros",
 "television","therewasanattempt","tifu","todayilearned","trashy","travel",
 "trees","trippinthroughtime","videos","whatisthisthing","wholesomememes",
 "woahdude","woodworking","worldnews","xboxone","youseeingthisshit"]
-# sub_name = ["starcitizen", "AmItheAsshole"]
+sub_name = ["starcitizen", "AmItheAsshole"]
+
+#Read in Data
 
 for sub in top200:
     comments = []
     # data[sub] = []
-    for submission in reddit.subreddit(sub).hot(limit=300):
+    for submission in reddit.subreddit(sub).hot(limit=100):
         comments.append(submission.title)
         comments.append(submission.selftext)
-    print('comment length:', len(comments))
+        # tt=submission.title
+        # ts=submission.selftext
+        # np.savetxt(sub+'.txt', fmt='s100', tt)
+        # np.savetxt(sub+'.txt', ts)
+    print(sub, 'comment length:', len(comments))
     data[sub] = comments
     # data[sub].append(comments, ignore_index=True)
+
 for s in data:
-    print(data[sub_name])
+    print(data[top200])
     print(len(data))
-data.to_csv('test.csv')
+
+# data.to_csv('test.csv')
+
+#Encode Data as chars
+
+#Create the sequence data
+
+# Specify x & y
+
+#build the model (single LSTM)

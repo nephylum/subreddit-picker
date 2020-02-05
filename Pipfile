@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+praw = "*"
+pandas = "*"
+tensorflow = "*"
+numpy = "*"
+scipy = "*"
+scikit-learn = "*"
+pillow = "*"
+h5py = "*"
+keras = "*"
+keras-preprocessing = "*"
+keras-applications = "*"
+
+[requires]
+python_version = "3.7"
